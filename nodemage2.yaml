@@ -1,0 +1,101 @@
+apiVersion: "v1"
+kind: Service
+metadata:
+  name: "nodemage2-service"
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 30800
+      
+  selector:
+    app: "nodemage2"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "nodemage2"
+  labels:
+    app: "nodemage2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "nodemage2"
+  template:
+    metadata:
+      labels:
+        app: "nodemage2"
+    spec:
+      containers:
+        - name: "nodemage2"
+          image: "alexcheng/magento2"
+          ports:
+          - containerPort: 8888
+          env:
+            - name: MYSQL_HOST
+              value: dbmage2
+            - name: MYSQL_ROOT_PASSWORD
+              value: myrootpassword
+            - name: MYSQL_USER
+              value: magento
+            - name: MYSQL_PASSWORD
+              value: magento
+            - name: MYSQL_DATABASE          
+              value: magento
+            - name: MAGENTO_LANGUAGE
+              value: en_GB
+            - name: MAGENTO_TIMEZONE
+              value: Pacific/Auckland
+            - name:MAGENTO_DEFAULT_CURRENCY
+              value: NZD
+            - name: MAGENTO_URL
+              value: http://3.20.198.161
+            - name: MAGENTO_BACKEND_FRONTNAME
+              value: admin
+            - name: MAGENTO_USE_SECURE
+              value: 0
+            - name: MAGENTO_BASE_URL_SECURE
+              value: 0
+            - name: MAGENTO_USE_SECURE_ADMIN
+              value: 0
+            - name: MAGENTO_ADMIN_FIRSTNAME
+              value: Admin
+            - name: MAGENTO_ADMIN_LASTNAME         
+              value: vtainfo
+            - name: MAGENTO_ADMIN_EMAIL
+              value: contato@vtainfo.com.br
+            - name: MAGENTO_ADMIN_USERNAME
+              value: admin
+            - name: MAGENTO_ADMIN_PASSWORD
+              value: magentorocks1
+
+        volumeMounts:
+        - name: logs
+          mountPath: /var/www/html/var/log
+        - name: magento-data
+          mountPath: /var/www/html 
+          - image: busybox
+            name: system-log
+            command: ["/bin/sh"]
+            args:
+            - -c
+            - |
+              touch /var/www/html/var/log/system.log
+              chown 33:33 /var/www/html/var/log/system.log
+              tail -n+1 -f /var/www/html/var/log/system.log
+        volumeMounts:
+        - name: logs
+          mountPath: /var/www/html/var/log
+        - name: magento-data
+          mountPath: /var/www/html           
+      volumes:
+      - name: logs
+        emptyDir: {}
+      -name: magento-data 
+
+            
