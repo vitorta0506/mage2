@@ -10,3 +10,19 @@ spec:
   - ReadWriteOnce
   hostPath:
     path: /var/lib/mysql
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: magento-data
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /var/www/html

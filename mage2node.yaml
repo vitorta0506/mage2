@@ -15,6 +15,20 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: magento-data
+spec:
+  storageClassName: manual       
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -77,8 +91,8 @@ spec:
           volumeMounts:
             - name: logs
               mountPath: /var/www/html/var/log/
-            #- name: magento-data
-            #  mountPath: /var/www/html 
+            - name: magento-data
+              mountPath: /var/www/html 
         - image: busybox
           imagePullPolicy: IfNotPresent
           name: system-log
@@ -93,4 +107,6 @@ spec:
       volumes:
       - name: logs
         emptyDir: {}
-      #- name: magento-data
+      - name: "magento-data"
+        persistentVolumeClaim:
+          claimName: magento-data
