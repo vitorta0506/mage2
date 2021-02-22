@@ -91,7 +91,22 @@ spec:
           volumeMounts:
             - name: logs
               mountPath: /var/www/html/var/log/
-#            - name: magento-data
+      containers:
+        - name: flb-sidecar
+          image: "fluent/fluent-bit"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 2020
+              protocol: TCP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /fluent-bit/etc/
+            - name: logs
+              mountPath: /var/www/html/var/log
+            #- name: report
+            #  mountPath: /var/www/html/var/report        
+#       - name: magento-data
 #              mountPath: /var/www/html 
         #- image: busybox
         #  imagePullPolicy: IfNotPresent
@@ -107,6 +122,9 @@ spec:
       volumes:
       - name: logs
         emptyDir: {}
+      - name: config-volume
+        configMap:
+            name: flb-sidecar        
 #      - name: "magento-data"
 #        persistentVolumeClaim:
 #          claimName: magento-data
