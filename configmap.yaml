@@ -41,7 +41,7 @@ data:
     [OUTPUT]
         Name          forward
         Match         *
-        Host          http://10.40.0.4:3100/loki/api/v1/push
+        Host          http://3.20.198.161:31354/loki/api/v1/push
         Port          3100
 
   parsers.conf: |
