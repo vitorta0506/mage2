@@ -75,8 +75,8 @@ spec:
               value: magentorocks1
 
           volumeMounts:
-            - name: logs
-              mountPath: /var/www/html/var/log/
+            #- name: logs
+            #  mountPath: /var/www/html/var/log/
             - name: magento-data
               mountPath: /var/www/html 
 #        - image: busybox
