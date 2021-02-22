@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: flb-sidecar
-  namespace: default
+  namespace: magento2
   labels:
     app.kubernetes.io/name: default
     helm.sh/chart: default-0.1.0
