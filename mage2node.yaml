@@ -91,7 +91,6 @@ spec:
           volumeMounts:
             - name: logs
               mountPath: /var/www/html/var/log/
-      containers:
         - name: flb-sidecar
           image: "fluent/fluent-bit"
           imagePullPolicy: IfNotPresent
