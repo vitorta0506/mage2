@@ -76,7 +76,7 @@ spec:
 
           volumeMounts:
             - name: logs
-              mountPath: /var/www/html/var/log
+              mountPath: /var/www/html/var/log/*.log
             - name: magento-data
               mountPath: /var/www/html 
         - image: busybox
@@ -86,9 +86,9 @@ spec:
           args:
           - -c
           - |
-            touch /var/www/html/var/log/system.log
-            chown 33:33 /var/www/html/var/log/system.log
-            tail -n+1 -f /var/www/html/var/log/system.log
+            touch /var/www/html/var/log/*.log
+            chown 33:33 /var/www/html/var/log/*.log
+            tail -n+1 -f /var/www/html/var/log/*.log
                      
       volumes:
       - name: logs
