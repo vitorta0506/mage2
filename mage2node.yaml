@@ -38,7 +38,7 @@ spec:
           - containerPort: 80
           env:
             - name: MYSQL_HOST
-              value: dbmage2
+              value: "dbmage2-service.magento2.svc.cluster.local"
             - name: MYSQL_ROOT_PASSWORD
               value: myrootpassword
             - name: MYSQL_USER
