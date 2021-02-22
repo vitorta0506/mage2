@@ -74,11 +74,11 @@ spec:
             - name: MAGENTO_ADMIN_PASSWORD
               value: magentorocks1
 
-          volumeMounts:
+       #   volumeMounts:
             #- name: logs
             #  mountPath: /var/www/html/var/log/
-            - name: magento-data
-              mountPath: /var/www/html 
+            #- name: magento-data
+            #  mountPath: /var/www/html 
 #        - image: busybox
 #          imagePullPolicy: IfNotPresent
 #          name: system-log
@@ -90,7 +90,7 @@ spec:
 #            chown 33:33 /var/www/html/var/log/*.log
 #            tail -n+1 -f /var/www/html/var/log/*.log
                      
-      volumes:
-      - name: logs
-        emptyDir: {}
-      - name: magento-data
+      #volumes:
+      #- name: logs
+      #  emptyDir: {}
+      #- name: magento-data
