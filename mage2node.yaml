@@ -54,7 +54,7 @@ spec:
             - name: MAGENTO_DEFAULT_CURRENCY
               value: NZD
             - name: MAGENTO_URL
-              value: http://3.20.198.161
+              value: "http://3.20.198.161"
             - name: MAGENTO_BACKEND_FRONTNAME
               value: admin
             - name: MAGENTO_USE_SECURE
